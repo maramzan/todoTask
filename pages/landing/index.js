@@ -1,78 +1,55 @@
-import { AppBar, IconButton, Toolbar } from "@mui/material";
-import { makeStyles } from "@mui/styles"
-import SortIcon from '@mui/icons-material/Sort';
-import React, { useEffect, useState } from 'react';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import GlobalStyles from "@mui/material/GlobalStyles";
+import Container from "@mui/material/Container";
+import Link from "next/link";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Header from "../../src/components/header";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontFamily: 'Nunito',
-      },
-      appbar: {
-        background: 'none',
-      },
-      appbarWrapper: {
-        width: '80%',
-        margin: '0 auto',
-      },
-      appbarTitle: {
-        flexGrow: '1',
-      },
-      icon: {
-        color: '#fff',
-        fontSize: '2rem',
-      },
-      colorText: {
-        color: '#162328',
-      },
-      container: {
-        textAlign: 'center',
-      },
-      title: {
-        color: '#fff',
-        fontSize: '4.5rem',
-      },
-      goDown: {
-        color: '#5AFF3D',
-        fontSize: '4rem',
-      },
-}))
+const tiers = [
+  {
+    title: "Pro",
+    subheader: "Most popular",
+    price: "15",
+    description: ["20 users included", "10 GB of storage", "Help center access", "Priority email support"],
+    buttonText: "Get started",
+    buttonVariant: "contained",
+  },
+];
 
-const Landing = () => {
-    const classes = useStyles();
-    const [checked, setChecked] = useState(false);
-
-    useEffect(() => {
-        Aos.init({ duration: 2000 });
-      }, []);
+function PricingContent() {
+    React.useEffect(() => {
+            Aos.init({ duration: 2000 });
+    }, [])
+    
   return (
-    <div className={classes.root} id="header">
-    <AppBar className={classes.appbar} elevation={0}>
-      <Toolbar className={classes.appbarWrapper}>
-        <h1 className={classes.appbarTitle}>
-          My<span className={classes.colorText}>Todo.</span>
-        </h1>
-        <IconButton>
-          <SortIcon className={classes.icon} />
-        </IconButton>
-      </Toolbar>
-    </AppBar>
-    
-        <div data-aos="fade-down" className={classes.container}>
-          <h1 className={classes.title}>
-            Welcome to <br />
-            My<span className={classes.colorText}>Todo.</span>
-          </h1>
-        </div>
-
-    
-  </div>
-  )
+    <React.Fragment>
+      <CssBaseline />
+      <Header />
+      <Container data-aos="fade-down" disableGutters maxWidth="sm" component="main" sx={{ pt: 8 }}>
+        <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
+          Welcome
+        </Typography>
+        <Typography variant="h5" align="center" color="text.secondary" component="p">
+          Welcome to the todo task assigned by Persue Today.
+        </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center", mt:6 }}>
+        <Link href="/homepage">
+          <Button variant="contained">Homepage</Button>
+        </Link>
+      </Box>
+      </Container>
+      
+    </React.Fragment>
+  );
 }
 
-export default Landing
+export default function Pricing() {
+  return <PricingContent />;
+}
