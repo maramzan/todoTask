@@ -3,14 +3,14 @@ import React from "react";
 
 const InputField = () => {
   return (
-    <Paper elevation={2} sx={{ maxWidth: "500px", margin: "0 auto" }}>
+    <Box sx={{ maxWidth: "500px", margin: "0 auto" }}>
       <Box sx={{ p: 2, display: "flex" }}>
-        <TextField sx={{ flexGrow: 1 }} placeholder="Add todo here" />
+        <TextField sx={{ flexGrow: 1, px:2 }} placeholder="Add todo here" />
         <Button sx={{ py: 2, px: 4 }} variant="contained">
           Add
         </Button>
       </Box>
-    </Paper>
+    </Box>
   );
 };
 
