@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
+import { CircularProgress } from "@mui/material";
 
 const theme = createTheme();
 
@@ -18,10 +19,19 @@ export default function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const clearFields=()=>{
+    setUsername('');
+    setEmail('');
+    setPassword('');
+  }
+
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
+
 
     const user = {
       email,
@@ -43,12 +53,18 @@ export default function SignUp() {
       console.log('response signpup', res);
 
       if (res?.email) {
+        clearFields();
         router.push("/login");
+        setLoading(false);
       } else {
         alert(res?.message|| "something went wrong");
+        setLoading(false)
+        
       }
     } catch (error) {
       alert(error?.message || "something went wrong" );
+      setLoading(false)
+
     }
   };
 
@@ -106,8 +122,8 @@ export default function SignUp() {
               id="password"
               autoComplete="current-password"
             />
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign Up
+            <Button type="submit" disabled={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              {loading ? <CircularProgress size={25} color="inherit" /> : "Sign Up"}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

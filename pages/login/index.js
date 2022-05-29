@@ -94,7 +94,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button disabled={loading} type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               {loading ? <CircularProgress size={25} color="inherit" /> : "Sign In"}
             </Button>
             <Grid container justifyContent="flex-end">
