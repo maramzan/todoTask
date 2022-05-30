@@ -1,12 +1,7 @@
 import React from "react";
-import Landing from "./landing";
+import Landing from "../components/landing";
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minHeight: "100vh",
-  },
-}));
 
 export default function Index() {
   const classes = useStyles();
@@ -16,3 +11,8 @@ export default function Index() {
     </div>
   );
 }
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+  },
+}));

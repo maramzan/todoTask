@@ -12,44 +12,14 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
+import useLogin from '../../hooks/useLogin';
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  
   const router = useRouter();
-
-  const loginHandler = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const user = {
-      email: email,
-      password: password,
-    };
-
-    console.log("login user", user);
-
-    let res = await fetch("http://localhost:3000/api/users", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
-
-    res = await res.json();
-    console.log("login res", res);
-
-    if (res?.data == "success") {
-      router.push("/homepage");
-      setLoading(false);
-    } else {
-      alert("User Not Found");
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {}, []);
+  const {loading, loginHandler,email,password,setEmail,setPassword}=useLogin();
 
   return (
     <ThemeProvider theme={theme}>

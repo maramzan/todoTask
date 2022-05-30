@@ -4,25 +4,17 @@ import React, { useState, useEffect } from "react";
 import Header from "../../src/components/header";
 import InputField from "../../src/components/inputField";
 import TodoList from "../../src/components/todoList";
+import useHomepage from "../../hooks/useHomepage";
 
 const Homepage = React.memo(({ inputValue, onInputChange, onInputKeyPress, onButtonClick }) => {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  // const [jwt, setJwt] = useState('')
+  const { loading, userData, setUserData, logUser, updateUser } = useHomepage();
 
-  const loguser = async () => {
-    setLoading(true);
-    const res = await fetch("http://localhost:3000/api/users/login");
-    const { data, id } = await res.json();
+  // console.log("userData",userData)
+  
 
-    if (data == "JWT Success") {
-      setLoading(false);
-    } else {
-      router.push("/login");
-    }
-  };
   useEffect(() => {
-    loguser();
+    logUser();
   }, []);
 
   return loading ? (
@@ -30,8 +22,8 @@ const Homepage = React.memo(({ inputValue, onInputChange, onInputKeyPress, onBut
   ) : (
     <>
       <Header showSignIN={false} />
-      <InputField />
-      <TodoList items={["1", "2"]} />
+      <InputField onUpdate={updateUser} onInputChange={(e)=>setUserData({...userData, username: e.target.value})} username={userData?.username} />
+      {/* <TodoList items={["1", "2"]} /> */}
     </>
   );
 });

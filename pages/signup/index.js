@@ -12,61 +12,13 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { CircularProgress } from "@mui/material";
+import useSignup from "../../hooks/useSignup";
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { loading, email, password, username, setUsername, setEmail, setPassword, handleSignup } = useSignup();
   const router = useRouter();
-
-  const clearFields=()=>{
-    setUsername('');
-    setEmail('');
-    setPassword('');
-  }
-
-  const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-
-
-    const user = {
-      email,
-      username,
-      password
-    };
-
-    try {
-      let res = await fetch("http://localhost:3000/api/users", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-      res = await res.json();
-  
-      console.log('response signpup', res);
-
-      if (res?.email) {
-        clearFields();
-        router.push("/login");
-        setLoading(false);
-      } else {
-        alert(res?.message|| "something went wrong");
-        setLoading(false)
-        
-      }
-    } catch (error) {
-      alert(error?.message || "something went wrong" );
-      setLoading(false)
-
-    }
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,7 +38,18 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSignup} noValidate sx={{ mt: 1 }}>
+            <TextField
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              type="email"
+            />
             <TextField
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -97,19 +60,8 @@ export default function SignUp() {
               label="Username"
               type="text"
               id="username"
-              autoFocus
             />
-            <TextField
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-            />
+
             <TextField
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -120,7 +72,6 @@ export default function SignUp() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
             />
             <Button type="submit" disabled={loading} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               {loading ? <CircularProgress size={25} color="inherit" /> : "Sign Up"}

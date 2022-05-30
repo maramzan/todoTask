@@ -17,7 +17,6 @@ function Landing() {
   const loguser = async () => {
     const res = await fetch("http://localhost:3000/api/users/login");
     const { data, id } = await res.json();
-    console.log('logUser',{ data, id });
 
     if (data == "JWT Success") {
       setJwt(id);
@@ -41,7 +40,7 @@ function Landing() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Header showSignIN={jwt ? false : true} />
+      <Header isLanding />
       <Container data-aos="fade-down" disableGutters maxWidth="sm" component="main" sx={{ pt: 8 }}>
         <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
           Welcome
@@ -49,11 +48,6 @@ function Landing() {
         <Typography variant="h5" align="center" color="text.secondary" component="p">
           Welcome to the todo task assigned by Persue Today.
         </Typography>
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 6 }}>
-          <Button onClick={gotoHomepage} variant="contained">
-            Homepage
-          </Button>
-        </Box>
       </Container>
     </React.Fragment>
   );
