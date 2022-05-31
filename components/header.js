@@ -10,11 +10,12 @@ const Header = ({ isLanding }) => {
   return (
     <AppBar position="static" color="default" elevation={0} sx={{ background: "none", justifyContent: "center" }}>
       <Toolbar sx={{ flexWrap: "wrap", width: "80%", margin: "0 auto" }}>
-        <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1, ml: 2 }}>
+        <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1, fontWeight:'bold' , ml: 2,...(isLanding? {
+    color: 'White'}:{color:'black'}) }}>
           My Task
         </Typography>
         {isLanding ? (
-          <Button variant="outlined" onClick={() => router.push("/login")} sx={{ my: 1, mx: 1.5 }}>
+          <Button variant="contained" onClick={() => router.push("/login")} sx={{ my: 1, mx: 1.5,  }}>
             Sign In
           </Button>
         ) : (

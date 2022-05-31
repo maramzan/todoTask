@@ -8,6 +8,7 @@ import Link from "next/link";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useRouter } from "next/router";
+import { makeStyles } from "@mui/styles";
 import Header from '../header'
 
 function Landing() {
@@ -23,34 +24,45 @@ function Landing() {
     }
   };
 
-  const gotoHomepage = () => {
-    loguser();
-    if (jwt) {
-      router.push("/homepage");
-    } else {
-      router.push("/login");
-    }
-  };
 
   useEffect(() => {
     Aos.init({ duration: 2000 });
     loguser();
   }, []);
+  const classes = useStyles();
+
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Header isLanding />
-      <Container data-aos="fade-down" disableGutters maxWidth="sm" component="main" sx={{ pt: 8 }}>
-        <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
+      <Container data-aos="fade-down" disableGutters maxWidth="sm" component="main" className={classes.testWrapper}>
+        <div>
+        <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom sx={{color:'white'}}>
           Welcome
         </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" component="p">
-          Welcome to the todo task assigned by Persue Today.
+        <Typography variant="h5" align="center" color="text.secondary" component="p" sx={{color:'white'}}>
+          Welcome to the task assigned by Persue Today.
         </Typography>
+        </div>
       </Container>
     </React.Fragment>
   );
 }
 
+
+
+const useStyles = makeStyles((theme) => ({
+  testWrapper: {
+    display: "flex",
+    flex: 1,
+    height:' calc(100vh - 100px)',
+    justifyContent:'center',
+    alignItems:'center',
+    
+  }
+ 
+}));
+
 export default Landing;
+

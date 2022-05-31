@@ -25,8 +25,9 @@ const useHomepage = () => {
     }
   };
 
-  const updateUser = async () => {
+  const updateUser = async (e) => {
     try {
+      e.preventDefault();
       setLoading(true);
       const res = await fetch("/api/users", {
         method: "PUT",

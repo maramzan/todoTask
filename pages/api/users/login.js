@@ -15,7 +15,6 @@ export default async (req, res) => {
       email: req.body.email,
     });
 
-    console.log("user hash", user);
     delete user?.password;
 
     const isCorrectPass = bcryptjs.compareSync(req.body.password, user.password);
