@@ -33,8 +33,6 @@ const useHomepage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: userData?.username }),
       });
-      const data = res.json();
-      console.log(data);
 
     } catch (error) {
       setLoading(false);

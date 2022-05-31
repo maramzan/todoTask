@@ -11,25 +11,30 @@ const useLogin = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      const user = {
-        email: email,
-        password: password,
-      };
+      if (email !== "" && password !== "") {
+        const user = {
+          email: email,
+          password: password,
+        };
 
-      let res = await fetch("/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
+        let res = await fetch("/api/users/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        });
 
-      res = await res.json();
+        res = await res.json();
 
-      if (res?.data == "success") {
-        router.push("/homepage");
-        setLoading(false);
+        if (res?.data == "success") {
+          router.push("/homepage");
+          setLoading(false);
+        } else {
+          alert("User Not Found");
+          setLoading(false);
+        }
       } else {
-        alert("User Not Found");
         setLoading(false);
+        alert("please fill all the fields");
       }
     } catch (error) {
       console.log("Error white SignOut", error);

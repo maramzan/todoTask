@@ -39,6 +39,17 @@ export default function SignUp() {
             Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSignup} noValidate sx={{ mt: 1 }}>
+          <TextField
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              margin="normal"
+              required
+              fullWidth
+              name="username"
+              label="Username"
+              type="text"
+              id="username"
+            />
             <TextField
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -50,17 +61,7 @@ export default function SignUp() {
               name="email"
               type="email"
             />
-            <TextField
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              margin="normal"
-              required
-              fullWidth
-              name="username"
-              label="Username"
-              type="text"
-              id="username"
-            />
+            
 
             <TextField
               value={password}

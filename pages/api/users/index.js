@@ -1,7 +1,5 @@
 import dbConnect from "../../../utils/dbConnect";
 import UserModel from "../../../models/UserSchema";
-import { serialize } from "cookie";
-import { sign } from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { verify } from "jsonwebtoken";
 
@@ -13,9 +11,6 @@ export default async (req, res) => {
   switch (method) {
     case "PUT":
       try {
-        // const username = req.body.username;
-        // const userEmail = req.body.email;
-        // UserModel.updateOne(userEmail)
         const { cookies } = req;
         const { username } = req.body;
 

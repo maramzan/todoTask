@@ -1,7 +1,7 @@
 import { AppBar, Button, CircularProgress, IconButton, Toolbar, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import useLogout from "../../hooks/useLogout";
+import useLogout from "../hooks/useLogout";
 
 const Header = ({ isLanding }) => {
   const { handleSignOut, loading } = useLogout();

@@ -7,8 +7,8 @@ import Container from "@mui/material/Container";
 import Link from "next/link";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import Header from "../../src/components/header";
 import { useRouter } from "next/router";
+import Header from '../header'
 
 function Landing() {
   const [jwt, setJwt] = React.useState("");
